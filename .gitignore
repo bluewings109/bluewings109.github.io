@@ -15,3 +15,9 @@ Gemfile.lock
 # npm dependencies
 node_modules
 package-lock.json
+
+# visual studio code
+workspace.code-workspace
+
+# drafts
+_drafts
