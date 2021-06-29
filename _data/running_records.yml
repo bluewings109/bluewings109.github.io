@@ -1,0 +1,31 @@
+- year: 2021
+  month: 6
+  records:
+    - day: 1
+      distance: 9.35
+      min: 58
+      sec: 30
+    - day: 2
+      distance: 5.53
+      min: 33
+      sec: 48
+    - day: 7
+      distance: 9.28
+      min: 58
+      sec: 00
+    - day: 9
+      distance: 7.43
+      min: 48
+      sec: 43
+    - day: 21
+      distance: 7.09
+      min: 43
+      sec: 25
+    - day: 24
+      distance: 7.00
+      min: 44
+      sec: 29
+    - day: 29
+      distance: 7.13
+      min: 44
+      sec: 01
