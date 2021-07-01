@@ -29,3 +29,10 @@
       distance: 7.13
       min: 44
       sec: 01
+- year: 2021
+  month: 7
+  records:
+    - day: 1
+      distance: 7.0
+      min: 41
+      sec: 55

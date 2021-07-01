@@ -28,7 +28,7 @@ order: 5
         {% assign pace_sec = pace_in_sec | minus: temp | floor %}
         <tr>
             <td>{{ element.year }}/{{element.month}}/{{record.day}}</td>
-            <td>{{ pace_min }}'{{ pace_sec }}"/km</td>
+            <td>{{ pace_min }}'{% if pace_sec < 10 %}0{% endif %}{{ pace_sec }}"/km</td>
             <td>{{ record.distance }}km</td>
             <td>{{ record.min }}'{% if record.sec < 10 %}0{% endif %}{{ record.sec }}"</td>
         </tr>
