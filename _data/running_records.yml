@@ -52,3 +52,11 @@
       distance: 5.53
       min: 39
       sec: 12
+    - day: 20
+      distance: 5.72
+      min: 39
+      sec: 33
+    - day: 23
+      distance: 7.02
+      min: 46
+      sec: 23
