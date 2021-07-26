@@ -40,6 +40,10 @@
       distance: 5.51
       min: 38
       sec: 2
+    - day: 8
+      distance: 7.03
+      min: 43
+      sec: 54
     - day: 10
       distance: 7.12
       min: 43
