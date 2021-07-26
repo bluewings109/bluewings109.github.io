@@ -7,14 +7,21 @@ theme: jekyll-theme-chirpy
 # change below value to '/projectname'.
 baseurl: ''
 
-# the HTML language tag › https://www.w3.org/International/questions/qa-choosing-language-tags
+# The language of the site layout › http://www.lingoes.net/en/translator/langcode.htm
+# Go to folder '_data/locales' to check the available language options
 lang: ko-KR
+
+# The lang attribute of HTML › http://www.lingoes.net/en/translator/langcode.htm
+# We can specify a language different from the layout of the content.
+# If it is not assigned, the site will use the value of 'lang' instead.
+content_lang: ''
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: Asia/Seoul
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # --------------------------
+
 title: 블로그왕 개랑맨                          # the main title
 
 tagline: 달리기와 개발을 취미로 하는 개랑맨의 일상   # it will display as the sub-title
@@ -82,7 +89,7 @@ avatar: ./assets/img/avartar.jpeg
 toc: true
 
 disqus:
-  comments: true  # boolean type, the global switch for posts comments.
+  comments: false  # boolean type, the global switch for posts comments.
   shortname: 'bluewings109-github-io'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 paginate: 10
@@ -163,3 +170,6 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
+# Outdated configuration warning
+outdated: '-- Missing configuration options! --'
