@@ -80,3 +80,10 @@
       distance: 7.03
       min: 45
       sec: 26
+- year: 2021
+  month: 8
+  records:
+    - day: 1
+      distance: 7.4
+      min: 41
+      sec: 57
