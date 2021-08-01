@@ -10,11 +10,12 @@ order: 5
 <table>
     <theader>
     <tr align="center">
-        <th colspan="6">{{ element.year }}년 {{ element.month }}월</th>
+        <th colspan="7">{{ element.year }}년 {{ element.month }}월</th>
     </tr>
     </theader>
     <tbody align="center">
         <tr>
+            <th>회차</th>
             <th>일자</th>
             <th>기온</th>
             <th>페이스</th>
@@ -30,6 +31,7 @@ order: 5
         {% assign pace_sec = pace_in_sec | minus: temp | floor %}
         <tr>
             {% assign run_date = element.year | append: "-" | append: element.month | append: "-" | append: record.day | append: " " | append: record.starttime %}
+            <td>{{ forloop.index }}</td>
             <td>{{ run_date  | date: "%Y-%m-%d %H:%M"}}</td>
             <td>{{ record.temperature }} °C</td>
             <td>{{ pace_min }}'{% if pace_sec < 10 %}0{% endif %}{{ pace_sec }}"/km</td>
