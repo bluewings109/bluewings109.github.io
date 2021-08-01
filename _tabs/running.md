@@ -10,15 +10,17 @@ order: 5
 <table>
     <theader>
     <tr align="center">
-        <th colspan="4">{{ element.year }}년 {{ element.month }}월</th>
+        <th colspan="6">{{ element.year }}년 {{ element.month }}월</th>
     </tr>
     </theader>
     <tbody align="center">
         <tr>
-            <th>날짜</th>
+            <th>일자</th>
+            <th>기온</th>
             <th>페이스</th>
             <th>거리</th>
             <th>시간</th>
+            <th>비고</th>
         </tr>
         {% for record in element.records %}
         {% assign sec_for_day_pace = 0 | plus: record.min | times: 60 | plus: record.sec %}
@@ -27,10 +29,13 @@ order: 5
         {% assign temp = 0 | plus: pace_min | times: 60 %}
         {% assign pace_sec = pace_in_sec | minus: temp | floor %}
         <tr>
-            <td>{{ element.year }}/{{element.month}}/{{record.day}}</td>
+            {% assign run_date = element.year | append: "-" | append: element.month | append: "-" | append: record.day | append: " " | append: record.starttime %}
+            <td>{{ run_date  | date: "%Y-%m-%d %H:%M"}}</td>
+            <td>{{ record.temperature }} °C</td>
             <td>{{ pace_min }}'{% if pace_sec < 10 %}0{% endif %}{{ pace_sec }}"/km</td>
             <td>{{ record.distance }}km</td>
             <td>{{ record.min }}'{% if record.sec < 10 %}0{% endif %}{{ record.sec }}"</td>
+            <td>{{ record.comments }}</td>
         </tr>
         {% assign month_distance = month_distance | plus: record.distance %}
         {% assign month_min = month_min | plus: record.min %}
