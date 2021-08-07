@@ -29,6 +29,20 @@
       min: 42
       sec: 16
       comments:
+    - day: 6
+      starttime: "06:23"
+      temperature: 26.0
+      distance: 5.53
+      min: 32
+      sec: 29
+      comments: 평일 아침운동
+    - day: 7
+      starttime: "06:50"
+      temperature: 23.0
+      distance: 11.22
+      min: 74
+      sec: 43
+      comments: 첫 LSD 훈련
 - year: 2021
   month: 7
   records:
