@@ -43,6 +43,20 @@
       min: 74
       sec: 43
       comments: 첫 LSD 훈련
+    - day: 9
+      starttime: "17:43"
+      temperature: 32.0
+      distance: 5.48
+      min: 41
+      sec: 57
+      comments: 2km 지점 언저리부터 종아리 근육통으로 인해 걷기로 대체
+    - day: 10
+      starttime: "18:31"
+      temperature: 31.0
+      distance: 7.01
+      min: 41
+      sec: 33
+      comments: 
 - year: 2021
   month: 7
   records:
