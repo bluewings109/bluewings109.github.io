@@ -71,6 +71,13 @@
       min: 39
       sec: 49
       comments: 
+    - day: 16
+      starttime: "07:22"
+      temperature: 23.0
+      distance: 7.13
+      min: 46
+      sec: 50
+      comments: 컨디션 이상으로 LSD 중도 포기
 - year: 2021
   month: 7
   records:
