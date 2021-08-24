@@ -92,6 +92,13 @@
       min: 31
       sec: 27
       comments: 
+    - day: 24
+      starttime: "17:38"
+      temperature: 26.0
+      distance: 7.03
+      min: 41
+      sec: 53
+      comments: 
 - year: 2021
   month: 7
   records:
