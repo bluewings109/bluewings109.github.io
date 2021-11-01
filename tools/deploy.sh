@@ -108,7 +108,7 @@ deploy() {
   git add -A
   git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
 
-if $_no_pages_branch; then
+  if $_no_pages_branch; then
     git push -u origin "$PAGES_BRANCH"
   else
     git push -f
@@ -125,7 +125,7 @@ main() {
     exit 0
   fi
 
-  setup_gh  
+  setup_gh
   backup
   flush
   deploy
