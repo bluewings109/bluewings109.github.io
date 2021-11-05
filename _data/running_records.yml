@@ -8,6 +8,20 @@
       min: 17
       sec: 54
       comments: 부상 회복 런(발등 건염)
+    - day: 3
+      starttime: "18:00"
+      temperature: 13.3
+      distance: 4.11
+      min: 23
+      sec: 01
+      comments: 
+    - day: 5
+      starttime: "18:07"
+      temperature: 15.8
+      distance: 5.53
+      min: 30
+      sec: 47
+      comments: 
 - year: 2021
   month: 10
   records:
