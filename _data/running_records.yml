@@ -36,6 +36,13 @@
       min: 58
       sec: 43
       comments: 런성히어로 2회차
+    - day: 19
+      starttime: "17:08"
+      temperature: 14.0
+      distance: 7.13
+      min: 39
+      sec: 10
+      comments: 
 - year: 2021
   month: 10
   records:
