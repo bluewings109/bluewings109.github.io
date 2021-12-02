@@ -1,4 +1,14 @@
 - year: 2021
+  month: 12
+  records:
+    - day: 1
+      starttime: "17:37"
+      temperature: -1.0
+      distance: 10.11
+      min: 63
+      sec: 52
+      comments: 
+- year: 2021
   month: 11
   records:
     - day: 1
