@@ -8,6 +8,20 @@
       min: 63
       sec: 52
       comments: 
+    - day: 3
+      starttime: "17:57"
+      temperature: 2.0
+      distance: 10.22
+      min: 66
+      sec: 7
+      comments: 
+    - day: 6
+      starttime: "17:24"
+      temperature: 8.0
+      distance: 11.03
+      min: 71
+      sec: 25
+      comments: 
 - year: 2021
   month: 11
   records:
