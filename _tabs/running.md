@@ -10,7 +10,7 @@ order: 5
 <table>
     <theader>
     <tr align="center">
-        <th colspan="7">{{ element.year }}년 {{ element.month }}월</th>
+        <th colspan="8">{{ element.year }}년 {{ element.month }}월</th>
     </tr>
     </theader>
     <tbody align="center">
@@ -21,6 +21,7 @@ order: 5
             <th>페이스</th>
             <th>거리</th>
             <th>시간</th>
+            <th>심박수</th>
             <th>비고</th>
         </tr>
         {% for record in element.records %}
@@ -37,6 +38,7 @@ order: 5
             <td>{{ pace_min }}'{% if pace_sec < 10 %}0{% endif %}{{ pace_sec }}"/km</td>
             <td>{{ record.distance }}km</td>
             <td>{{ record.min }}'{% if record.sec < 10 %}0{% endif %}{{ record.sec }}"</td>
+            <td>{{ record.heartrate }}</td>
             <td>{{ record.comments }}</td>
         </tr>
         {% assign month_distance = month_distance | plus: record.distance %}
