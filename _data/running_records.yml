@@ -49,6 +49,46 @@
       sec: 5
       heartrate: 170
       comments: 
+    - day: 17
+      starttime: "16:30"
+      temperature: -5.0
+      distance: 10.19
+      min: 58
+      sec: 14
+      heartrate: 167
+      comments: 
+    - day: 21
+      starttime: "16:51"
+      temperature: 7.0
+      distance: 13.72
+      min: 87
+      sec: 38
+      heartrate: 167
+      comments: 
+    - day: 22
+      starttime: "17:59"
+      temperature: 4.0
+      distance: 13.34
+      min: 86
+      sec: 4
+      heartrate: 166
+      comments: 
+    - day: 27
+      starttime: "15:57"
+      temperature: -2.0
+      distance: 10.25
+      min: 61
+      sec: 5
+      heartrate: 170
+      comments: 
+    - day: 28
+      starttime: "17:42"
+      temperature: 0.0
+      distance: 10.2
+      min: 64
+      sec: 24
+      heartrate: 166
+      comments: 
 - year: 2021
   month: 11
   records:
