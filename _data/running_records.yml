@@ -1,3 +1,14 @@
+- year: 2022
+  month: 1
+  records:
+    - day: 3
+      starttime: "17:41"
+      temperature: 0.0
+      distance: 10.24
+      min: 61
+      sec: 36
+      heartrate: 171
+      comments: 
 - year: 2021
   month: 12
   records:
@@ -89,6 +100,14 @@
       sec: 24
       heartrate: 166
       comments: 
+    - day: 30
+      starttime: "16:31"
+      temperature: -1.0
+      distance: 10.05
+      min: 52
+      sec: 45
+      heartrate: 178
+      comments: 2021년 10km PB
 - year: 2021
   month: 11
   records:
