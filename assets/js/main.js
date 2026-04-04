@@ -39,9 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('keydown', function(e) {
     // Scroll to sections with keyboard shortcuts
     const shortcuts = {
-        's': '#skills',
         'c': '#career',
-        'h': '#hobbies',
         'o': '#contact'
     };
 
