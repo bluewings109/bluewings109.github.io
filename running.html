@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Running — Youngbeom Kim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .stat-card {
+            background: rgba(30, 58, 95, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.25rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            background: rgba(30, 58, 95, 0.5);
+        }
+        .month-card {
+            background: rgba(30, 58, 95, 0.25);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        .month-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            background: rgba(30, 58, 95, 0.45);
+        }
+        .month-card.has-data {
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+        .year-btn {
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            color: #93c5fd;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .year-btn:hover {
+            background: rgba(59, 130, 246, 0.15);
+        }
+        .year-btn.active {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.8);
+            color: #fff;
+        }
+        .skeleton {
+            background: linear-gradient(90deg, rgba(30,58,95,0.3) 25%, rgba(59,130,246,0.1) 50%, rgba(30,58,95,0.3) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 0.375rem;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #93c5fd; }
+    </style>
+</head>
+<body class="bg-slate-900 text-white font-sans min-h-screen">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-10 bg-slate-900/90 backdrop-blur border-b border-slate-700/50 px-4 py-4">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="back-link">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back
+            </a>
+            <h1 class="text-lg font-bold tracking-tight">Running Records</h1>
+            <div class="w-16"></div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12">
+
+        <!-- Error Banner -->
+        <div id="error-banner" class="hidden mb-8 p-4 bg-red-900/30 border border-red-500/40 rounded-lg text-red-300 text-sm text-center"></div>
+
+        <!-- Yearly Summary Cards -->
+        <section class="mb-12 fade-in-section">
+            <h2 class="text-2xl font-bold mb-6 text-blue-300">Yearly Overview</h2>
+            <div id="yearly-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- skeleton -->
+                <div class="stat-card"><div class="skeleton h-4 w-16 mb-2"></div><div class="skeleton h-7 w-24"></div></div>
+                <div class="stat-card"><div class="skeleton h-4 w-16 mb-2"></div><div class="skeleton h-7 w-24"></div></div>
+                <div class="stat-card"><div class="skeleton h-4 w-16 mb-2"></div><div class="skeleton h-7 w-24"></div></div>
+                <div class="stat-card"><div class="skeleton h-4 w-16 mb-2"></div><div class="skeleton h-7 w-24"></div></div>
+            </div>
+        </section>
+
+        <!-- Year Selector + Monthly Chart -->
+        <section class="mb-12 fade-in-section">
+            <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+                <h2 class="text-2xl font-bold text-blue-300">Monthly Distance</h2>
+                <div id="year-selector" class="flex gap-2 flex-wrap"></div>
+            </div>
+            <div class="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4 md:p-6">
+                <canvas id="monthly-chart" height="220"></canvas>
+            </div>
+        </section>
+
+        <!-- Monthly Cards Grid -->
+        <section class="fade-in-section">
+            <h2 class="text-2xl font-bold mb-6 text-blue-300">Monthly Detail</h2>
+            <div id="monthly-cards" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <!-- filled by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-700 py-8 text-center text-gray-500 text-sm">
+        <p>© 2025 Youngbeom Kim</p>
+    </footer>
+
+    <script>
+        const API_BASE = 'https://jog-post-production.up.railway.app/api/v1/public';
+        const USER_EMAIL = 'bluewings109@gmail.com';
+
+        let userId = null;
+        let yearlyData = [];
+        let selectedYear = null;
+        let chart = null;
+
+        // ── 유틸 ──────────────────────────────────────────────
+        function fmtPace(secPerKm) {
+            if (!secPerKm) return '-';
+            const m = Math.floor(secPerKm / 60);
+            const s = Math.round(secPerKm % 60);
+            return `${m}'${String(s).padStart(2, '0')}"`;
+        }
+
+        function fmtTime(totalSec) {
+            if (!totalSec) return '-';
+            const h = Math.floor(totalSec / 3600);
+            const m = Math.floor((totalSec % 3600) / 60);
+            if (h > 0) return `${h}h ${m}m`;
+            return `${m}m`;
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('error-banner');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+        }
+
+        // ── API 호출 ──────────────────────────────────────────
+        async function fetchJson(url) {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+        }
+
+        async function resolveUserId() {
+            const data = await fetchJson(`${API_BASE}/users/lookup?email=${encodeURIComponent(USER_EMAIL)}`);
+            return data.id;
+        }
+
+        async function fetchYearly(uid) {
+            return fetchJson(`${API_BASE}/users/${uid}/statistics/yearly`);
+        }
+
+        async function fetchMonthly(uid, year) {
+            return fetchJson(`${API_BASE}/users/${uid}/statistics/monthly?year=${year}`);
+        }
+
+        // ── 렌더: 연도별 요약 ─────────────────────────────────
+        function renderYearlyCards(years) {
+            if (!years.length) {
+                document.getElementById('yearly-cards').innerHTML =
+                    '<p class="col-span-4 text-gray-400 text-sm text-center py-4">No data yet.</p>';
+                return;
+            }
+
+            // 전체 합산
+            const total = years.reduce((acc, y) => ({
+                dist: acc.dist + y.total_distance,
+                count: acc.count + y.activity_count,
+                time: acc.time + y.total_moving_time,
+                elev: acc.elev + y.total_elevation_gain,
+            }), { dist: 0, count: 0, time: 0, elev: 0 });
+
+            const cards = [
+                { label: 'Total Distance', value: `${total.dist.toFixed(0)} km` },
+                { label: 'Total Runs', value: `${total.count}` },
+                { label: 'Total Time', value: fmtTime(total.time) },
+                { label: 'Total Elevation', value: `${total.elev.toFixed(0)} m` },
+            ];
+
+            document.getElementById('yearly-cards').innerHTML = cards.map(c => `
+                <div class="stat-card">
+                    <p class="text-xs text-gray-400 mb-1">${c.label}</p>
+                    <p class="text-2xl font-bold text-white">${c.value}</p>
+                </div>
+            `).join('');
+        }
+
+        // ── 렌더: 연도 선택 버튼 ──────────────────────────────
+        function renderYearSelector(years) {
+            const selector = document.getElementById('year-selector');
+            const availableYears = years.map(y => y.period_start.substring(0, 4)).sort((a, b) => b - a);
+
+            selector.innerHTML = availableYears.map(yr => `
+                <button class="year-btn ${yr === String(selectedYear) ? 'active' : ''}"
+                        onclick="selectYear(${yr})">${yr}</button>
+            `).join('');
+        }
+
+        // ── 렌더: 월별 차트 ───────────────────────────────────
+        function renderChart(months) {
+            const ALL_MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+            const distByMonth = new Array(12).fill(0);
+            months.forEach(m => {
+                const idx = new Date(m.period_start).getMonth();
+                distByMonth[idx] = m.total_distance;
+            });
+
+            const ctx = document.getElementById('monthly-chart').getContext('2d');
+            if (chart) chart.destroy();
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ALL_MONTHS,
+                    datasets: [{
+                        label: 'Distance (km)',
+                        data: distByMonth,
+                        backgroundColor: distByMonth.map(v =>
+                            v > 0 ? 'rgba(59,130,246,0.7)' : 'rgba(59,130,246,0.1)'
+                        ),
+                        borderColor: distByMonth.map(v =>
+                            v > 0 ? 'rgba(59,130,246,1)' : 'rgba(59,130,246,0.2)'
+                        ),
+                        borderWidth: 1,
+                        borderRadius: 4,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => `${ctx.parsed.y.toFixed(1)} km`,
+                            },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#94a3b8', font: { size: 12 } },
+                            grid: { color: 'rgba(148,163,184,0.08)' },
+                        },
+                        y: {
+                            ticks: {
+                                color: '#94a3b8',
+                                font: { size: 12 },
+                                callback: v => `${v} km`,
+                            },
+                            grid: { color: 'rgba(148,163,184,0.08)' },
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
+        }
+
+        // ── 렌더: 월별 카드 ───────────────────────────────────
+        function renderMonthlyCards(months) {
+            const ALL_MONTHS = [
+                'January','February','March','April','May','June',
+                'July','August','September','October','November','December'
+            ];
+
+            const byMonth = {};
+            months.forEach(m => {
+                const idx = new Date(m.period_start).getMonth();
+                byMonth[idx] = m;
+            });
+
+            document.getElementById('monthly-cards').innerHTML = ALL_MONTHS.map((name, i) => {
+                const m = byMonth[i];
+                if (!m) {
+                    return `
+                        <div class="month-card opacity-40">
+                            <p class="text-xs font-semibold text-gray-400 mb-2">${name}</p>
+                            <p class="text-gray-600 text-sm">No data</p>
+                        </div>`;
+                }
+                return `
+                    <div class="month-card has-data">
+                        <p class="text-xs font-semibold text-blue-300 mb-2">${name}</p>
+                        <p class="text-xl font-bold">${m.total_distance.toFixed(1)} <span class="text-sm font-normal text-gray-400">km</span></p>
+                        <div class="mt-2 space-y-0.5 text-xs text-gray-400">
+                            <p>${m.activity_count} run${m.activity_count !== 1 ? 's' : ''}</p>
+                            <p>${fmtTime(m.total_moving_time)}</p>
+                            <p>Pace ${fmtPace(m.avg_pace_sec_per_km)}</p>
+                            ${m.avg_heartrate ? `<p>♥ ${m.avg_heartrate} bpm</p>` : ''}
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+
+        // ── 연도 선택 ─────────────────────────────────────────
+        async function selectYear(year) {
+            selectedYear = year;
+            renderYearSelector(yearlyData);
+
+            try {
+                const data = await fetchMonthly(userId, year);
+                renderChart(data.months);
+                renderMonthlyCards(data.months);
+            } catch (e) {
+                showError(`Failed to load ${year} data.`);
+            }
+        }
+
+        // ── 초기화 ────────────────────────────────────────────
+        async function init() {
+            try {
+                userId = await resolveUserId();
+            } catch {
+                showError('Running records are not public yet. Please check back later.');
+                document.getElementById('yearly-cards').innerHTML =
+                    '<p class="col-span-4 text-gray-400 text-sm text-center py-4">Unavailable</p>';
+                return;
+            }
+
+            try {
+                const data = await fetchYearly(userId);
+                yearlyData = data.years;
+                renderYearlyCards(yearlyData);
+
+                if (yearlyData.length > 0) {
+                    const latestYear = Math.max(
+                        ...yearlyData.map(y => parseInt(y.period_start.substring(0, 4)))
+                    );
+                    await selectYear(latestYear);
+                } else {
+                    document.getElementById('year-selector').innerHTML =
+                        '<span class="text-gray-500 text-sm">No data</span>';
+                    renderChart([]);
+                    renderMonthlyCards([]);
+                }
+            } catch (e) {
+                showError('Failed to load statistics. Please try again later.');
+            }
+        }
+
+        // IntersectionObserver (style.css 애니메이션 재사용)
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        observer.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+
+            init();
+        });
+    </script>
+</body>
+</html>
